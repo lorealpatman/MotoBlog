@@ -21,6 +21,7 @@ const Home = () => {
   return (
     <>
       <Header />
+
       <div className='home'>
         <Posts posts={posts} />
         <Sidebar />

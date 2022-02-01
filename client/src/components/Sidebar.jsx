@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+// import React, { useEffect, useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import axios from 'axios';
 import me from '../images/me.jpg';
 
 const Sidebar = () => {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const getCategories = async () => {
-      const res = await axios.get('/categories');
-      setCategories(res.data);
-    };
-    getCategories();
-  }, []);
+  // useEffect(() => {
+  //   const getCategories = async () => {
+  //     const res = await axios.get('/categories');
+  //     setCategories(res.data);
+  //   };
+  //   getCategories();
+  // }, []);
 
   return (
     <div className='sidebar'>
@@ -28,7 +28,7 @@ const Sidebar = () => {
           pariatur.
         </p>
       </div>
-      <div className='sidebarItem'>
+      {/* <div className='sidebarItem'>
         <span className='sidebarTitle'>CATEGORIES</span>
         <ul className='sidebarList'>
           {categories.map((c) => (
@@ -37,14 +37,20 @@ const Sidebar = () => {
             </Link>
           ))}
         </ul>
-      </div>
+      </div> */}
       <div className='sidebarItem'>
         <span className='sidebarTitle'>FOLLOW</span>
         <div className='sidebarSocial'>
-          <i className='sidebarIcon fab fa-facebook-square'></i>
-          <i className='sidebarIcon fab fa-twitter-square'></i>
-          <i className='sidebarIcon fab fa-pinterest-square'></i>
-          <i className='sidebarIcon fab fa-instagram-square'></i>
+          {/* <i className='sidebarIcon fab fa-facebook-square'></i> */}
+          <a href='https://www.instagram.com/rev_rosey'>
+            <i className='sidebarIcon fab fa-instagram-square'></i>
+          </a>
+          <a href='https://www.pinterest.com/realtwenty'>
+            <i className='sidebarIcon fab fa-pinterest-square'></i>
+          </a>
+          <a href='https://www.twitter.com/lofi_verse_'>
+            <i className='sidebarIcon fab fa-twitter-square'></i>
+          </a>
         </div>
       </div>
     </div>

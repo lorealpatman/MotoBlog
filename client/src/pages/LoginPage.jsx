@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useRef } from 'react';
 import { Context } from '../context/Context';
 
@@ -7,6 +7,8 @@ const LoginPage = () => {
   const userRef = useRef();
   const passwordRef = useRef();
   const { dispatch, isFetching } = useContext(Context);
+
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ const LoginPage = () => {
       });
       dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
     } catch (error) {
+      setError(true);
       dispatch({ type: 'LOGIN_FAILURE' });
     }
   };
@@ -43,6 +46,13 @@ const LoginPage = () => {
         <button className='loginButton' type='submit' disabled={isFetching}>
           Login
         </button>
+        {error && (
+          <span
+            style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}
+          >
+            Username or password is incorrect
+          </span>
+        )}
       </form>
       <button className='loginRegisterButton'>Register</button>
     </div>
