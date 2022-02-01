@@ -12,28 +12,28 @@ import path from 'path';
 dotenv.config();
 
 app.use(express.json());
+const __dirname = path.resolve();
+app.use('/images', express.static(path.join(__dirname, '/images')));
+
 connectDB();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    );
+    cb(null, req.body.name);
   },
 });
 
 const upload = multer({ storage: storage });
-app.post('/api/upload', upload.single('image'), (req, res) => {
+app.post('/api/upload', upload.single('file'), (req, res) => {
   res.status(200).json('File has been uploaded');
 });
 
-app.get('/', (req, res) => {
-  res.send('API is running....');
-});
+// app.get('/', (req, res) => {
+//   res.send('API is running....');
+// });
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);

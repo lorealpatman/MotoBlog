@@ -1,34 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Post = () => {
+const Post = ({ post }) => {
+  const pubFolder = 'http://localhost:5000/images/';
   return (
     <div className='post'>
-      <img
-        className='postImg'
-        src='https://images.pexels.com/photos/3806275/pexels-photo-3806275.jpeg'
-        alt=''
-      />
+      {post.photo && (
+        <img className='postImg' src={pubFolder + post.photo} alt='' />
+      )}
+
       <div className='postInfo'>
         <div className='postCategories'>
-          <span className='postCategory'>Riding</span>
-          <span className='postCategory'>Life</span>
+          {post.categories.map((c) => (
+            <span className='postCategory' key={post._id}>
+              {c.name}{' '}
+            </span>
+          ))}
         </div>
-        <span className='postTitle'>Lorem ipsum dolor sit amet</span>
+        <Link to={`/post/${post._id}`} className='link'>
+          <span className='postTitle'>{post.title}</span>
+        </Link>
         <hr />
-        <span className='postDate'>1 hour ago</span>
+        <span className='postDate'>
+          {new Date(post.createdAt).toDateString()}
+        </span>
       </div>
-      <p className='postDescription'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem
-        ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad
-      </p>
+      <p className='postDescription'>{post.descr}</p>
     </div>
   );
 };
